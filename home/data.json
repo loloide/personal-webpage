@@ -29,7 +29,9 @@
     {
       "x": 1,
       "y": -1,
-      "value": "FFF"
+      "value": "FFF",
+      "link": "/talkroom",
+      "speciality": "connect"
     },
     {
       "x": -1,

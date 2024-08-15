@@ -277,6 +277,30 @@ function applySpeciality(speciality) {
       text("Visit\nmy GitHub ~", gridData[cell].x * grid, gridData[cell].y * grid);     
       pop();
     break
+    case "connect": 
+      image(
+        lainImg,
+        gridData[cell].x * grid - boxSize / 2,
+        gridData[cell].y * grid - boxSize / 2,
+        boxSize,
+        boxSize,
+      );
+      fill(0, 0, 0, 127);
+      rect(
+        gridData[cell].x * grid - boxSize / 2,
+        gridData[cell].y * grid - boxSize / 2,
+        boxSize,
+        boxSize,
+      );
+
+      push();
+      fill("#FFF");
+      textFont(lainFont);
+      textAlign(CENTER, CENTER);
+      textSize(12.5);
+      text("Connect-", gridData[cell].x * grid, gridData[cell].y * grid);
+      pop();
+    break
   }
 }
 

@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: loveLetter;
+}
+
+#main-page {
+  background-color: rgba(0,0,0,1 );
+  color: white;
+
+  top: 100;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+
+  position: absolute;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 50%;
+}
+
+canvas {
+  display: block;
+  position: absolute;
+}
