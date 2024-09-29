@@ -56,7 +56,8 @@
     {
       "x": -5,
       "y": -5,
-      "value": "FFF"
+      "value": "#ff0055",
+      "speciality": "monogatari"
     },
     {
       "x": -5,
