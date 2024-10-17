@@ -11,7 +11,8 @@
     {
       "x": 0,
       "y": 0,
-      "value": "#FFF"
+      "value": "#FFF",
+      "speciality": "homeContent"
     },
     {
       "x": -1,
@@ -21,9 +22,9 @@
       "link": "https://github.com/loloide"
     },
     {
-      "x": 0, 
+      "x": 0,
       "y": -1,
-      "value": "FFF",
+      "value": "#fff",
       "speciality": "home"
     },
     {
@@ -56,33 +57,32 @@
     {
       "x": -5,
       "y": -5,
-      "value": "#ff0055",
-      "speciality": "monogatari"
+      "value": "#FFF"
     },
     {
       "x": -5,
       "y": -4,
-      "value": "FFF"
+      "value": "#FFF"
     },
     {
       "x": -4,
       "y": -5,
-      "value": "FFF"
+      "value": "#FFF"
     },
     {
       "x": -4,
       "y": -4,
-      "value": "FFF"
+      "value": "#FFF"
     },
     {
       "x": -5,
       "y": -4,
-      "value": "FFF"
+      "value": "#FFF"
     },
     {
       "x": -5,
       "y": -3,
-      "value": "FFF"
+      "value": "#FFF"
     },
     {
       "x": -5,

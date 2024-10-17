@@ -7,17 +7,19 @@ var grid = 150;
 var boxSize = 120;
 var gridData = {};
 var stepTime = 5;
-var moveSpeed = 500;
+var moveSpeed = 250;
 var cameraMoveSpeed = moveSpeed / 2;
-var fov = 0.15;
+var fov = 3.14;
 var aspRatio = windowAspRatio;
 var userPos = {
     x: 0,
-    y: -1,
+    y: 0,
 };
 var moving = false;
-let fogColor;
-let fogDensity = 0.01;
+const camHeightOriginal = 65;
+var camHeight = camHeightOriginal;
+
+var stepSize = 1;
 
 function preload() {
     edgesTexture = loadImage("/assets/edges.png");
@@ -41,25 +43,41 @@ function preload() {
 function setup() {
     var canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
     canvas.parent("canvas");
-    setAttributes({ antialias: false, perPixelLighting: false });
+    setAttributes({ antialias: true, perPixelLighting: true });
     pixelDensity(1);
     cursor(CROSS);
     frameRate(30);
-    fov = 0.15;
+    fov = PI / 2;
     background(0);
 }
 
 function draw() {
     background(0);
-    strokeWeight(2);
-    translate(-(grid * userPos.x), -(grid * userPos.y), -100);
     perspective(fov, aspRatio, 10, 1000000);
 
-    var lightIntensity = 255;
-    lightFalloff(0, 0.004, 0);
-    pointLight(lightIntensity, lightIntensity, lightIntensity, 0, 0, 100);
-    var c = color(255, 255, 255);
-    directionalLight(c, 0, 0, -1);
+    camera(
+        grid * userPos.x,
+        grid * userPos.y,
+        camHeight,
+        grid * userPos.x,
+        grid * userPos.y,
+        0,
+        0,
+        1,
+        0
+    );
+
+    var white = color(255, 255, 255);
+    directionalLight(white, 0, 0, -1);
+
+    lightFalloff(0, 5 / 1000, 0);
+    pointLight(white, grid * userPos.x, grid * userPos.y, camHeightOriginal);
+
+    // if (camHeight != camHeightOriginal) {
+    //     rotateY(sin(frameCount * 0.01) / 200);
+    //     rotateX(sin(frameCount * 0.01) / 200);
+    //     rotateZ(sin(frameCount * 0.01) / 200);
+    // }
 
     for (cell in gridData) {
         if (gridData[cell].value) {
@@ -67,7 +85,7 @@ function draw() {
             translate(
                 gridData[cell].x * grid,
                 gridData[cell].y * grid,
-                -(boxSize * 100000) / 2
+                -(boxSize * 25) / 2
             );
 
             fill(gridData[cell].value);
@@ -76,125 +94,105 @@ function draw() {
                 ? applyTexture(gridData[cell].texture)
                 : null;
 
-            box(boxSize, boxSize, boxSize * 100000);
+            box(boxSize, boxSize, boxSize * 25);
             pop();
 
-            gridData[cell].speciality
-                ? applySpeciality(gridData[cell].speciality)
-                : null;
+            if (camHeight == camHeightOriginal) {
+                gridData[cell].speciality
+                    ? applySpeciality(gridData[cell].speciality)
+                    : null;
+            }
+            // } else {
+            //     fill("#fff");
+            //     rect(grid * userPos.x - 2, grid * userPos.y - 25, 4, 50);
+            //     rect(grid * userPos.x - 25, grid * userPos.y - 2, 50, 4);
+            // }
         }
+    }
+
+    noStroke();
+
+    document.getElementById("pos").innerHTML =
+        "(" + parseInt(userPos.x) + ", " + -parseInt(userPos.y) + ")";
+}
+
+function moveX(x) {
+    if (moving != true) {
+        moving = true;
+
+        var targetValue = x;
+        const steps = moveSpeed / stepTime;
+        const increment = (targetValue - userPos.x) / steps;
+        let currentValue = userPos.x;
+        let currentStep = 0;
+
+        const interval = setInterval(() => {
+            currentValue += increment;
+            currentStep++;
+            userPos.x = currentValue;
+
+            if (currentStep >= steps) {
+                clearInterval(interval);
+                currentValue = targetValue; // Ensure the final value is exact
+                userPos.x = parseInt(currentValue);
+            }
+        }, stepTime);
+
+        moving = false;
+    }
+}
+
+function moveY(y) {
+    if (moving != true) {
+        moving = true;
+
+        var targetValue = y;
+        const steps = moveSpeed / stepTime;
+        const increment = (targetValue - userPos.y) / steps;
+        let currentValue = userPos.y;
+        let currentStep = 0;
+
+        const interval = setInterval(() => {
+            currentValue += increment;
+            currentStep++;
+            userPos.y = currentValue;
+
+            if (currentStep >= steps) {
+                clearInterval(interval);
+                currentValue = targetValue; // Ensure the final value is exact
+                userPos.y = parseInt(currentValue);
+            }
+        }, stepTime);
+
+        moving = false;
     }
 }
 
 addEventListener("keydown", (event) => {
     switch (event.keyCode) {
-        case 65 || 37:
-            //go left
-            console.log("left");
-            if (moving != true) {
-                moving = true;
-
-                var targetValue = userPos.x - 1;
-                const steps = moveSpeed / stepTime;
-                const increment = (targetValue - userPos.x) / steps;
-                let currentValue = userPos.x;
-                let currentStep = 0;
-
-                const interval = setInterval(() => {
-                    currentValue += increment;
-                    currentStep++;
-                    userPos.x = currentValue;
-
-                    if (currentStep >= steps) {
-                        clearInterval(interval);
-                        currentValue = targetValue; // Ensure the final value is exact
-                        userPos.x = parseInt(currentValue);
-                    }
-                }, stepTime);
-
-                moving = false;
-            }
+        case 65:
+            moveX(userPos.x - stepSize);
             break;
-        case 87 || 38:
-            //go up
-            console.log("up");
-            if (moving != true) {
-                moving = true;
-
-                var targetValue = userPos.y - 1;
-                const steps = moveSpeed / stepTime;
-                const increment = (targetValue - userPos.y) / steps;
-                let currentValue = userPos.y;
-                let currentStep = 0;
-
-                const interval = setInterval(() => {
-                    currentValue += increment;
-                    currentStep++;
-                    userPos.y = currentValue;
-
-                    if (currentStep >= steps) {
-                        clearInterval(interval);
-                        currentValue = targetValue; // Ensure the final value is exact
-                        userPos.y = parseInt(currentValue);
-                    }
-                }, stepTime);
-
-                moving = false;
-            }
+        case 87:
+            moveY(userPos.y - stepSize);
             break;
-        case 68 || 39:
-            //go right
-            console.log("right");
-            if (moving != true) {
-                moving = true;
-
-                var targetValue = userPos.x + 1;
-                const steps = moveSpeed / stepTime;
-                const increment = (targetValue - userPos.x) / steps;
-                let currentValue = userPos.x;
-                let currentStep = 0;
-
-                const interval = setInterval(() => {
-                    currentValue += increment;
-                    currentStep++;
-                    userPos.x = currentValue;
-
-                    if (currentStep >= steps) {
-                        clearInterval(interval);
-                        currentValue = targetValue; // Ensure the final value is exact
-                        userPos.x = parseInt(currentValue);
-                    }
-                }, stepTime);
-
-                moving = false;
-            }
+        case 68:
+            moveX(userPos.x + stepSize);
             break;
-        case 83 || 40:
-            //go down
-            console.log("down");
-            if (moving != true) {
-                moving = true;
-
-                var targetValue = userPos.y + 1;
-                const steps = moveSpeed / stepTime;
-                const increment = (targetValue - userPos.y) / steps;
-                let currentValue = userPos.y;
-                let currentStep = 0;
-
-                const interval = setInterval(() => {
-                    currentValue += increment;
-                    currentStep++;
-                    userPos.y = currentValue;
-
-                    if (currentStep >= steps) {
-                        clearInterval(interval);
-                        currentValue = targetValue; // Ensure the final value is exact
-                        userPos.y = parseInt(currentValue);
-                    }
-                }, stepTime);
-
-                moving = false;
-            }
+        case 83:
+            moveY(userPos.y + stepSize);
+            break;
+        case 37:
+            moveX(userPos.x - stepSize);
+            break;
+        case 38:
+            moveY(userPos.y - stepSize);
+            break;
+        case 39:
+            moveX(userPos.x + stepSize);
+            break;
+        case 40:
+            moveY(userPos.y + stepSize);
             break;
 
         case 32:
@@ -202,15 +200,48 @@ addEventListener("keydown", (event) => {
             break;
 
         case 69:
-            if (fov >= 0.15) {
-                warpPerspective(0.15, aspRatio);
-            }
+            if (camHeight >= camHeightOriginal) {
+                var targetValue = camHeightOriginal;
+                const steps = moveSpeed / stepTime;
+                const increment = (targetValue - camHeight) / steps;
+                let currentValue = camHeight;
+                let currentStep = 0;
 
+                const interval = setInterval(() => {
+                    currentValue += increment;
+                    currentStep++;
+                    camHeight = currentValue;
+
+                    if (currentStep >= steps) {
+                        clearInterval(interval);
+                        currentValue = targetValue; // Ensure the final value is exact
+                        camHeight = parseInt(currentValue);
+                    }
+                }, stepTime);
+                warpPerspective(PI / 2, aspRatio);
+            }
             break;
 
         case 81:
-            if (fov <= 1.35) {
-                warpPerspective(1.35, aspRatio);
+            if (camHeight <= 10000) {
+                var targetValue = 400;
+                const steps = moveSpeed / stepTime;
+                const increment = (targetValue - camHeight) / steps;
+                let currentValue = camHeight;
+                let currentStep = 0;
+
+                const interval = setInterval(() => {
+                    currentValue += increment;
+                    currentStep++;
+                    camHeight = currentValue;
+
+                    if (currentStep >= steps) {
+                        clearInterval(interval);
+                        currentValue = targetValue; // Ensure the final value is exact
+                        camHeight = parseInt(currentValue);
+                    }
+                }, stepTime);
+                warpPerspective(PI - 1, aspRatio);
             }
             break;
     }
@@ -278,24 +309,24 @@ function applySpeciality(speciality) {
                 boxSize,
                 boxSize
             );
-            fill(0, 0, 0, 125);
-            rect(
-                gridData[cell].x * grid - boxSize / 2,
-                gridData[cell].y * grid - boxSize / 2,
-                boxSize,
-                boxSize
-            );
-            push();
-            fill("#FFF");
-            textFont(arial);
-            textAlign(CENTER, CENTER);
-            textSize(15);
-            text(
-                "Visit\nmy GitHub ~",
-                gridData[cell].x * grid,
-                gridData[cell].y * grid
-            );
-            pop();
+            // fill(0, 0, 0, 100);
+            // rect(
+            //     gridData[cell].x * grid - boxSize / 2,
+            //     gridData[cell].y * grid - boxSize / 2,
+            //     boxSize,
+            //     boxSize
+            // );
+            // push();
+            // fill("#FFF");
+            // textFont(arial);
+            // textAlign(CENTER, CENTER);
+            // textSize(15);
+            // text(
+            //     "Visit\nmy GitHub ~",
+            //     gridData[cell].x * grid,
+            //     gridData[cell].y * grid
+            // );
+            // pop();
             break;
         case "connect":
             image(
@@ -334,14 +365,58 @@ function applySpeciality(speciality) {
             );
             pop();
             break;
+        case "homeContent":
+            push();
+            fill("#000");
+            textFont(arial);
+            textAlign(LEFT, TOP);
+            textSize(4);
+            text(
+                "\n\nIm a Junior web Developer and Ski instructor from VLA, Argentina.\nI created this website to register everything from my projects to my favourite media.\n\n",
+                gridData[cell].x * grid - boxSize / 2 + 5,
+                gridData[cell].y * grid - boxSize / 2 + 5,
+                boxSize - 10,
+                boxSize - 10
+            );
+            pop();
+
+            push();
+            fill("#000");
+            textFont(arial);
+            textAlign(LEFT, BOTTOM);
+            textSize(4);
+            text(
+                "Move with W, A, S, D or the Arrows, Zoom out with Q and zoom in with E, Open pages with [Space]",
+                gridData[cell].x * grid - boxSize / 2 + 5,
+                gridData[cell].y * grid - boxSize / 2 + 5,
+                boxSize - 10,
+                boxSize - 10
+            );
+            pop();
+
+            push();
+            fill("#000");
+            textFont(arial);
+            textStyle(BOLD);
+            textAlign(LEFT, TOP);
+            textSize(8);
+            text(
+                "Hi, Welcome to my Website",
+                gridData[cell].x * grid - boxSize / 2 + 5,
+                gridData[cell].y * grid - boxSize / 2 + 5,
+                boxSize - 10,
+                boxSize - 10
+            );
+            pop();
+            break;
     }
 }
 
 async function redirect(x, y) {
     if (gridData[findIndex(gridData, x, y)].link) {
-        await warpPerspective(0.1, 1);
+        await warpPerspective(1, 1);
         window.location.href = gridData[findIndex(gridData, x, y)].link;
-        warpPerspective(0.15, windowAspRatio);
+        warpPerspective(PI / 2, windowAspRatio);
     }
 }
 
