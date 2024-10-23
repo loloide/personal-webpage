@@ -1,9 +1,11 @@
 var windowAspRatio = window.innerWidth / window.innerHeight;
-var edgesTexture;
-var lainImg;
-var githubLogo;
-var missingTexture;
-var siteMap;
+var edgesTexture,
+    lainImg,
+    githubLogo,
+    missingTexture,
+    siteMap,
+    huethuetImg,
+    impactFont;
 var grid = 150;
 var boxSize = 120;
 var gridData = {};
@@ -36,6 +38,7 @@ function preload() {
     missingTexture = loadImage("/assets/notexture.png");
     githubLogo = loadImage("/assets/githublogo.png");
     siteMap = loadImage("/assets/map.png");
+    huethuetImg = loadImage("/assets/huethuet.JPG");
 
     fetch("data.json")
         .then((response) => {
@@ -418,22 +421,6 @@ function applySpeciality(speciality) {
                 boxSize - 10
             );
             pop();
-
-                // fill("#FF0055");
-                // rect(
-                //     gridData[cell].x * grid - boxSize / 2 + 5,
-                //     gridData[cell].y * grid - boxSize / 2 + 35,
-                //     boxSize * (1 / 3) - 10,
-                //     boxSize * (2 / 3) - 20
-                // );
-
-            // fill(0);
-            // rect(
-            //     gridData[cell].x * grid - boxSize / 2 + 5,
-            //     gridData[cell].y * grid - boxSize / 2 + 36,
-            //     boxSize - 10,
-            //     boxSize - 53,
-            // );
             image(
                 siteMap,
                 gridData[cell].x * grid - boxSize / 2 + 5,
@@ -508,6 +495,45 @@ function applySpeciality(speciality) {
                 boxSize - 53
             );
             pop();
+
+            break;
+
+        case "huethuet":
+            image(
+                huethuetImg,
+                gridData[cell].x * grid - boxSize / 2 + 5,
+                gridData[cell].y * grid - boxSize / 2 + 5,
+                boxSize - 10,
+                boxSize - 25,
+                0,
+                0,
+                huethuetImg.width,
+                huethuetImg.height,
+                COVER
+            );
+
+            push();
+            textFont(lainFont);
+            fill("#000");
+            textAlign(CENTER, BOTTOM);
+            textSize(10);
+            text(
+                "Absolute Legend",
+                gridData[cell].x * grid - boxSize / 2 + 5,
+                gridData[cell].y * grid - boxSize / 2 + 5,
+                boxSize - 10,
+                boxSize - 10
+            );
+            pop();
+
+            // fill("#FFF");
+            // rect(
+            //     gridData[cell].x * grid - boxSize / 2 + 20,
+            //     gridData[cell].y * grid - boxSize / 2 + 80,
+            //     20,
+            //     10
+            // );
+            
 
             break;
     }

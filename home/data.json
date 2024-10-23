@@ -3,10 +3,7 @@
     {
       "x": -1,
       "y": 3,
-      "value": "#FFF",
-      "speciality": "lain",
-      "texture": "edges",
-      "link": "/lain"
+      "value": "#FFF"
     },
     {
       "x": 0,
@@ -151,6 +148,7 @@
     {
       "x": 3,
       "y": 1,
+      "speciality": "huethuet",
       "value": "FFF"
     }
   ]
