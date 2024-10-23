@@ -3,6 +3,7 @@ var edgesTexture;
 var lainImg;
 var githubLogo;
 var missingTexture;
+var siteMap;
 var grid = 150;
 var boxSize = 120;
 var gridData = {};
@@ -13,11 +14,19 @@ var fov = 3.14;
 var aspRatio = windowAspRatio;
 var userPos = {
     x: 0,
-    y: 0,
+    y: -1,
 };
 var moving = false;
 const camHeightOriginal = 65;
 var camHeight = camHeightOriginal;
+var mapColors = [
+    "#FFD6A5",
+    "#FFADAD",
+    "#FDFFB6",
+    "#E4F1EE",
+    "#D9EDF8",
+    "#DEDAF4",
+];
 
 var stepSize = 1;
 
@@ -26,6 +35,7 @@ function preload() {
     lainImg = loadImage("/assets/Lain.jpg");
     missingTexture = loadImage("/assets/notexture.png");
     githubLogo = loadImage("/assets/githublogo.png");
+    siteMap = loadImage("/assets/map.png");
 
     fetch("data.json")
         .then((response) => {
@@ -369,6 +379,7 @@ function applySpeciality(speciality) {
             push();
             fill("#000");
             textFont(arial);
+            textStyle(NORMAL);
             textAlign(LEFT, TOP);
             textSize(4);
             text(
@@ -379,7 +390,6 @@ function applySpeciality(speciality) {
                 boxSize - 10
             );
             pop();
-
             push();
             fill("#000");
             textFont(arial);
@@ -408,6 +418,97 @@ function applySpeciality(speciality) {
                 boxSize - 10
             );
             pop();
+
+                // fill("#FF0055");
+                // rect(
+                //     gridData[cell].x * grid - boxSize / 2 + 5,
+                //     gridData[cell].y * grid - boxSize / 2 + 35,
+                //     boxSize * (1 / 3) - 10,
+                //     boxSize * (2 / 3) - 20
+                // );
+
+            // fill(0);
+            // rect(
+            //     gridData[cell].x * grid - boxSize / 2 + 5,
+            //     gridData[cell].y * grid - boxSize / 2 + 36,
+            //     boxSize - 10,
+            //     boxSize - 53,
+            // );
+            image(
+                siteMap,
+                gridData[cell].x * grid - boxSize / 2 + 5,
+                gridData[cell].y * grid - boxSize / 2 + 36,
+                boxSize - 10,
+                boxSize - 53,
+                0,
+                0,
+                siteMap.width,
+                siteMap.height,
+                CONTAIN,
+                CENTER,
+                CENTER
+            );
+
+            push();
+            fill("#000");
+            textFont(arial);
+            textStyle(NORMAL);
+            textAlign(LEFT, TOP);
+            textSize(3);
+            text(
+                "Central Island",
+                gridData[cell].x * grid - boxSize / 2 + 47,
+                gridData[cell].y * grid - boxSize / 2 + 62,
+                boxSize - 10,
+                boxSize - 53
+            );
+            pop();
+
+            push();
+            fill("#000");
+            textFont(arial);
+            textStyle(BOLD);
+            textAlign(LEFT, TOP);
+            textSize(3);
+            text(
+                "Ski",
+                gridData[cell].x * grid - boxSize / 2 + 88,
+                gridData[cell].y * grid - boxSize / 2 + 47,
+                boxSize - 10,
+                boxSize - 53
+            );
+            pop();
+
+            push();
+            fill("#000");
+            textFont(arial);
+            textStyle(BOLD);
+            textAlign(LEFT, TOP);
+            textSize(3);
+            text(
+                "Favourites\nIsland",
+                gridData[cell].x * grid - boxSize / 2 + 34,
+                gridData[cell].y * grid - boxSize / 2 + 39,
+                boxSize - 10,
+                boxSize - 53
+            );
+            pop();
+
+            push();
+            fill("#000");
+            textFont(arial);
+            textStyle(BOLD);
+            textAlign(LEFT, TOP);
+            textSize(2);
+            text(
+                "Projects Island",
+                gridData[cell].x * grid - boxSize / 2 + 33,
+                gridData[cell].y * grid - boxSize / 2 + 89.5,
+                boxSize - 10,
+                boxSize - 53
+            );
+            pop();
+
             break;
     }
 }
