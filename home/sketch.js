@@ -80,17 +80,17 @@ function draw() {
         0
     );
 
+    if (camHeight != camHeightOriginal) {
+        rotateX(sin(frameCount / (20 * sqrt(2))) / 500);
+        rotateZ(sin(frameCount / (20 * exp(1))) / 500);
+        rotateY(sin(frameCount / 20) / 500);
+    }
+
     var white = color(255, 255, 255);
     directionalLight(white, 0, 0, -1);
 
     lightFalloff(0, 5 / 1000, 0);
     pointLight(white, grid * userPos.x, grid * userPos.y, camHeightOriginal);
-
-    // if (camHeight != camHeightOriginal) {
-    //     rotateY(sin(frameCount * 0.01) / 200);
-    //     rotateX(sin(frameCount * 0.01) / 200);
-    //     rotateZ(sin(frameCount * 0.01) / 200);
-    // }
 
     for (cell in gridData) {
         if (gridData[cell].value) {
@@ -115,11 +115,6 @@ function draw() {
                     ? applySpeciality(gridData[cell].speciality)
                     : null;
             }
-            // } else {
-            //     fill("#fff");
-            //     rect(grid * userPos.x - 2, grid * userPos.y - 25, 4, 50);
-            //     rect(grid * userPos.x - 25, grid * userPos.y - 2, 50, 4);
-            // }
         }
     }
 
@@ -497,7 +492,6 @@ function applySpeciality(speciality) {
             pop();
 
             break;
-
         case "huethuet":
             image(
                 huethuetImg,
@@ -518,7 +512,7 @@ function applySpeciality(speciality) {
             textAlign(CENTER, BOTTOM);
             textSize(10);
             text(
-                "Absolute Legend",
+                "ABSOLUTE LEGEND",
                 gridData[cell].x * grid - boxSize / 2 + 5,
                 gridData[cell].y * grid - boxSize / 2 + 5,
                 boxSize - 10,
@@ -533,7 +527,6 @@ function applySpeciality(speciality) {
             //     20,
             //     10
             // );
-            
 
             break;
     }
@@ -565,7 +558,7 @@ function warpPerspective(fovTargetValue, aspRatioTargetValue) {
 
             if (currentStep >= steps) {
                 clearInterval(interval);
-                fovCurrentValue = fovTargetValue; // Ensure the final value is exact
+                fovCurrentValue = fovTargetValue;
                 aspRatioCurrentValue = aspRatioTargetValue;
                 resolve();
             }
