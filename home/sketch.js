@@ -110,7 +110,13 @@ function draw() {
             box(boxSize, boxSize, boxSize * 25);
             pop();
 
-            if (camHeight == camHeightOriginal) {
+            if (
+                camHeight == camHeightOriginal &&
+                sqrt(
+                    abs(gridData[cell].x - userPos.x) +
+                        abs(gridData[cell].y - userPos.y)
+                ) < 2
+            ) {
                 gridData[cell].speciality
                     ? applySpeciality(gridData[cell].speciality)
                     : null;
@@ -519,15 +525,6 @@ function applySpeciality(speciality) {
                 boxSize - 10
             );
             pop();
-
-            // fill("#FFF");
-            // rect(
-            //     gridData[cell].x * grid - boxSize / 2 + 20,
-            //     gridData[cell].y * grid - boxSize / 2 + 80,
-            //     20,
-            //     10
-            // );
-
             break;
     }
 }
