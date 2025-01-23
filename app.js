@@ -30,7 +30,6 @@ app.use("/lain", express.static("lain"));
 app.use("/talkroom", express.static("talking-room"));
 
 io.sockets.on("connection", (socket) => {
-    console.log("asd", socket.id);
     socket.on("msg", function (data) {
         socket.broadcast.emit("msg", data);
     });

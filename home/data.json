@@ -1,10 +1,6 @@
 {
   "cells": [
-    {
-      "x": -1,
-      "y": 3,
-      "value": "#FFF"
-    },
+    
     {
       "x": 0,
       "y": -1,
@@ -98,12 +94,23 @@
     {
       "x": -3,
       "y": 3,
-      "value": "FFF"
+      "value": "FFF",
+      "speciality": "socialPixels",
+      "link": "https://github.com/loloide/socialpixels"
     },
     {
       "x": -2,
       "y": 3,
-      "value": "FFF"
+      "value": "FFF",
+      "speciality": "drinks",
+      "link": "https://github.com/loloide/WhatDrinkCanIDo-app"
+    },
+    {
+      "x": -1,
+      "y": 3,
+      "value": "#FFF",
+      "speciality": "uodrum",
+      "link": "https://github.com/loloide/Uodrum"
     },
     {
       "x": 2,
@@ -124,6 +131,7 @@
       "x": -1,
       "y": -3,
       "value": "FFF"
+
     },
     {
       "x": 5,
@@ -133,7 +141,8 @@
     {
       "x": 6,
       "y": -5,
-      "value": "FFF"
+      "value": "FFF",
+      "speciality": "ski"
     },
     {
       "x": 6,

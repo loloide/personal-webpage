@@ -5,7 +5,11 @@ var edgesTexture,
     missingTexture,
     siteMap,
     huethuetImg,
-    impactFont;
+    impactFont,
+    drinksImg,
+    uodrumImg,
+    skiImg,
+    pixelsImg;
 var grid = 150;
 var boxSize = 120;
 var gridData = {};
@@ -19,7 +23,7 @@ var userPos = {
     y: -1,
 };
 var moving = false;
-const camHeightOriginal = 65;
+const camHeightOriginal = 75;
 var camHeight = camHeightOriginal;
 var mapColors = [
     "#FFD6A5",
@@ -39,6 +43,10 @@ function preload() {
     githubLogo = loadImage("/assets/githublogo.png");
     siteMap = loadImage("/assets/map.png");
     huethuetImg = loadImage("/assets/huethuet.JPG");
+    drinksImg = loadImage("/assets/drinks.png");
+    uodrumImg = loadImage("/assets/uodrum.png");
+    skiImg = loadImage("/assets/ski.JPG");
+    pixelsImg = loadImage("/assets/pixels.png");
 
     fetch("data.json")
         .then((response) => {
@@ -56,7 +64,8 @@ function preload() {
 function setup() {
     var canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
     canvas.parent("canvas");
-    setAttributes({ antialias: true, perPixelLighting: true });
+
+    setAttributes({ perPixelLighting: true });
     pixelDensity(1);
     cursor(CROSS);
     frameRate(30);
@@ -387,7 +396,7 @@ function applySpeciality(speciality) {
             textAlign(LEFT, TOP);
             textSize(4);
             text(
-                "\n\nIm a Junior web Developer and Ski instructor from VLA, Argentina.\nI created this website to register everything from my projects to my favourite media.\n\n",
+                "\n\nIm a Junior web Developer and Ski instructor from Villa la Angostura, Argentina.\nI created this website to register everything from my projects to my life and favourite media.\n\n",
                 gridData[cell].x * grid - boxSize / 2 + 5,
                 gridData[cell].y * grid - boxSize / 2 + 5,
                 boxSize - 10,
@@ -437,65 +446,65 @@ function applySpeciality(speciality) {
                 CENTER
             );
 
-            push();
-            fill("#000");
-            textFont(arial);
-            textStyle(NORMAL);
-            textAlign(LEFT, TOP);
-            textSize(3);
-            text(
-                "Central Island",
-                gridData[cell].x * grid - boxSize / 2 + 47,
-                gridData[cell].y * grid - boxSize / 2 + 62,
-                boxSize - 10,
-                boxSize - 53
-            );
-            pop();
+            // push();
+            // fill("#000");
+            // textFont(arial);
+            // textStyle(NORMAL);
+            // textAlign(LEFT, TOP);
+            // textSize(3);
+            // text(
+            //     "Central Island",
+            //     gridData[cell].x * grid - boxSize / 2 + 47,
+            //     gridData[cell].y * grid - boxSize / 2 + 62,
+            //     boxSize - 10,
+            //     boxSize - 53
+            // );
+            // pop();
 
-            push();
-            fill("#000");
-            textFont(arial);
-            textStyle(BOLD);
-            textAlign(LEFT, TOP);
-            textSize(3);
-            text(
-                "Ski",
-                gridData[cell].x * grid - boxSize / 2 + 88,
-                gridData[cell].y * grid - boxSize / 2 + 47,
-                boxSize - 10,
-                boxSize - 53
-            );
-            pop();
+            // push();
+            // fill("#000");
+            // textFont(arial);
+            // textStyle(BOLD);
+            // textAlign(LEFT, TOP);
+            // textSize(3);
+            // text(
+            //     "Ski",
+            //     gridData[cell].x * grid - boxSize / 2 + 88,
+            //     gridData[cell].y * grid - boxSize / 2 + 47,
+            //     boxSize - 10,
+            //     boxSize - 53
+            // );
+            // pop();
 
-            push();
-            fill("#000");
-            textFont(arial);
-            textStyle(BOLD);
-            textAlign(LEFT, TOP);
-            textSize(3);
-            text(
-                "Favourites\nIsland",
-                gridData[cell].x * grid - boxSize / 2 + 34,
-                gridData[cell].y * grid - boxSize / 2 + 39,
-                boxSize - 10,
-                boxSize - 53
-            );
-            pop();
+            // push();
+            // fill("#000");
+            // textFont(arial);
+            // textStyle(BOLD);
+            // textAlign(LEFT, TOP);
+            // textSize(3);
+            // text(
+            //     "Favourites\nIsland",
+            //     gridData[cell].x * grid - boxSize / 2 + 34,
+            //     gridData[cell].y * grid - boxSize / 2 + 39,
+            //     boxSize - 10,
+            //     boxSize - 53
+            // );
+            // pop();
 
-            push();
-            fill("#000");
-            textFont(arial);
-            textStyle(BOLD);
-            textAlign(LEFT, TOP);
-            textSize(2);
-            text(
-                "Projects Island",
-                gridData[cell].x * grid - boxSize / 2 + 33,
-                gridData[cell].y * grid - boxSize / 2 + 89.5,
-                boxSize - 10,
-                boxSize - 53
-            );
-            pop();
+            // push();
+            // fill("#000");
+            // textFont(arial);
+            // textStyle(BOLD);
+            // textAlign(LEFT, TOP);
+            // textSize(2);
+            // text(
+            //     "Projects Island",
+            //     gridData[cell].x * grid - boxSize / 2 + 33,
+            //     gridData[cell].y * grid - boxSize / 2 + 89.5,
+            //     boxSize - 10,
+            //     boxSize - 53
+            // );
+            // pop();
 
             break;
         case "huethuet":
@@ -525,6 +534,139 @@ function applySpeciality(speciality) {
                 boxSize - 10
             );
             pop();
+            break;
+        case "drinks":
+            image(
+                drinksImg,
+                gridData[cell].x * grid - boxSize / 2,
+                gridData[cell].y * grid - boxSize / 2,
+                boxSize,
+                boxSize
+            );
+            if (isHoveringBox(gridData[cell].x, gridData[cell].y)) {
+                fill(0, 0, 0, 127);
+                rect(
+                    gridData[cell].x * grid - boxSize / 2,
+                    gridData[cell].y * grid - boxSize / 2,
+                    boxSize,
+                    boxSize
+                );
+
+                push();
+                fill("#FFF");
+                textFont(arial);
+                textAlign(CENTER, CENTER);
+                textSize(10);
+                text(
+                    "whatDrinkCanIDo",
+                    gridData[cell].x * grid,
+                    gridData[cell].y * grid
+                );
+                pop();
+            }
+            break;
+        case "uodrum":
+            image(
+                uodrumImg,
+                gridData[cell].x * grid - boxSize / 2 + 30,
+                gridData[cell].y * grid - boxSize / 2 + 30,
+                boxSize / 2,
+                boxSize / 2
+            );
+            if (isHoveringBox(gridData[cell].x, gridData[cell].y)) {
+                fill(0, 0, 0, 127);
+                rect(
+                    gridData[cell].x * grid - boxSize / 2,
+                    gridData[cell].y * grid - boxSize / 2,
+                    boxSize,
+                    boxSize
+                );
+
+                push();
+                fill("#FFF");
+                textFont(arial);
+                textAlign(CENTER, CENTER);
+                textSize(12.5);
+                text(
+                    "Uodrum",
+                    gridData[cell].x * grid,
+                    gridData[cell].y * grid
+                );
+                pop();
+            }
+            break;
+        case "socialPixels":
+            image(
+                pixelsImg,
+                gridData[cell].x * grid - boxSize / 2 + 30,
+                gridData[cell].y * grid - boxSize / 2 + 30,
+                boxSize / 2,
+                boxSize / 2
+            );
+            if (isHoveringBox(gridData[cell].x, gridData[cell].y)) {
+                fill(0, 0, 0, 127);
+                rect(
+                    gridData[cell].x * grid - boxSize / 2,
+                    gridData[cell].y * grid - boxSize / 2,
+                    boxSize,
+                    boxSize
+                );
+
+                push();
+                fill("#FFF");
+                textFont(arial);
+                textAlign(CENTER, CENTER);
+                textSize(12.5);
+                text(
+                    "socialPixels",
+                    gridData[cell].x * grid,
+                    gridData[cell].y * grid
+                );
+                pop();
+            }
+            break;
+
+        case "ski":
+            image(
+                skiImg,
+                gridData[cell].x * grid - boxSize / 2,
+                gridData[cell].y * grid - boxSize / 2,
+                boxSize,
+                boxSize,
+                0,
+                0,
+                skiImg.width,
+                skiImg.height,
+                COVER
+            );
+
+            if (isHoveringBox(gridData[cell].x, gridData[cell].y)) {
+                push();
+                fill("#000");
+                textFont(arial);
+                textStyle(NORMAL);
+                textAlign(LEFT, TOP);
+                textSize(4);
+
+                fill(0, 0, 0, 127);
+                rect(
+                    gridData[cell].x * grid - boxSize / 2,
+                    gridData[cell].y * grid - boxSize / 2,
+                    boxSize,
+                    boxSize
+                );
+                fill("FFF");
+                text(
+                    "Snow is my element",
+                    gridData[cell].x * grid - boxSize / 2 + 5,
+                    gridData[cell].y * grid - boxSize / 2 + 5,
+                    boxSize - 10,
+                    boxSize - 10
+                );
+
+                pop();
+            }
+
             break;
     }
 }
@@ -568,4 +710,18 @@ function findIndex(Array, targetX, targetY) {
     return Array.findIndex(
         (element) => element.x === target.x && element.y === target.y
     );
+}
+
+function isHoveringBox(cellX, cellY) {
+    if (userPos.x == cellX && userPos.y == cellY) {
+        if (
+            mouseX > window.innerWidth / 2 - boxSize * PI &&
+            mouseX < window.innerWidth / 2 + boxSize * PI &&
+            mouseY > window.innerHeight / 2 - boxSize * PI &&
+            mouseY < window.innerHeight / 2 + boxSize * PI
+        ) {
+            return true;
+        }
+    }
+    return false;
 }
