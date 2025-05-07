@@ -1,164 +1,223 @@
 {
   "cells": [
-    
     {
       "x": 0,
       "y": -1,
-      "value": "#FFF",
+      "props": {
+        "color": "#FFF"
+      },
       "speciality": "homeContent"
     },
     {
       "x": -1,
       "y": -1,
-      "value": "FFF",
+      "props": {
+        "color": "#FFF"
+      },
       "speciality": "github",
       "link": "https://github.com/loloide"
     },
     {
       "x": 0,
       "y": 0,
-      "value": "#fff"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": 1,
       "y": -1,
-      "value": "FFF",
+      "props": {
+        "color": "#FFF"
+      },
       "link": "/talkroom",
       "speciality": "connect"
     },
     {
       "x": -1,
       "y": 1,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": 0,
       "y": 1,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": 1,
       "y": 0,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -1,
       "y": 0,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -5,
       "y": -5,
-      "value": "#FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -5,
       "y": -4,
-      "value": "#FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -4,
       "y": -5,
-      "value": "#FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -4,
       "y": -4,
-      "value": "#FFF"
+      "props": {
+        "color": "#FFF"
+      },
+      "speciality": "music"
     },
     {
       "x": -5,
       "y": -4,
-      "value": "#FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -5,
       "y": -3,
-      "value": "#FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -5,
       "y": -1,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -4,
       "y": -1,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -3,
       "y": 1,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      },
+      "speciality": "touhouWiki",
+      "link": "https://en.touhouwiki.net/wiki/User:Anicka.dlc"
     },
     {
       "x": -3,
       "y": 3,
-      "value": "FFF",
+      "props": {
+        "color": "#FFF"
+      },
       "speciality": "socialPixels",
       "link": "https://github.com/loloide/socialpixels"
     },
     {
       "x": -2,
       "y": 3,
-      "value": "FFF",
+      "props": {
+        "color": "#FFF"
+      },
       "speciality": "drinks",
       "link": "https://github.com/loloide/WhatDrinkCanIDo-app"
     },
     {
       "x": -1,
       "y": 3,
-      "value": "#FFF",
+      "props": {
+        "color": "#FFF"
+      },
       "speciality": "uodrum",
       "link": "https://github.com/loloide/Uodrum"
     },
     {
       "x": 2,
       "y": -2,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": 2,
       "y": -1,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": 0,
       "y": -3,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": -1,
       "y": -3,
-      "value": "FFF"
-
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": 5,
       "y": -5,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": 6,
       "y": -5,
-      "value": "FFF",
+      "props": {
+        "color": "#FFF"
+      },
       "speciality": "ski"
     },
     {
       "x": 6,
       "y": -4,
-      "value": "FFF"
+      "props": {
+        "color": "#ff0055"
+      }
     },
     {
       "x": 4,
       "y": -3,
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     },
     {
       "x": 3,
       "y": 1,
       "speciality": "huethuet",
-      "value": "FFF"
+      "props": {
+        "color": "#FFF"
+      }
     }
   ]
 }
